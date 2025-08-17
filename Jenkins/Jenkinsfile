@@ -9,11 +9,11 @@ pipeline {
     }
 
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //         git branch: "${params.BRANCH_NAME}", url: 'https://github.com/Oreva-J/Jenkins-portfolio.git'
-        //     }
-        // }
+        stage('Checkout') {
+            steps {
+                git branch: "${params.BRANCH_NAME}", url: 'https://github.com/Oreva-J/Jenkins-portfolio.git'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
