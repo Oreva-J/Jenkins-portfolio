@@ -5,10 +5,10 @@ import SingleInfo from "./SingleInfo";
 
 const ContactInfo = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <SingleInfo text="abdelrahman.qassem@gmail.com" Image={HiOutlineMail} />
-      <SingleInfo text="+2 01000 66 24 55" Image={FiPhone} />
-      <SingleInfo text="Alexandria, Egypt" Image={IoLocationOutline} />
+    <div className="flex flex-col gap-3 bg-white/10 rounded-xl p-4 shadow border border-accent/10">
+      <SingleInfo text="oreva.soboss@email.com" Image={HiOutlineMail} />
+      <SingleInfo text="+234 8000 123 456" Image={FiPhone} />
+      <SingleInfo text="Lagos, Nigeria" Image={IoLocationOutline} />
     </div>
   );
 };

@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_REPO = 'nizzzy/docker-portfolio'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-repo.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKER_HUB_REPO}:${BUILD_NUMBER}")
+                }
+            }
+        }
+
+        stage('Push to DockerHub') {
+            steps {
+                withDockerRegistry([credentialsId: 'docker-pass', url: 'https://hub.docker.com/repository/docker/nizzzy/docker-portfolio']) {
+                    script {
+                        docker.image("${DOCKER_HUB_REPO}:${BUILD_NUMBER}").push()
+                        docker.image("${DOCKER_HUB_REPO}:${BUILD_NUMBER}").push("latest")
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(['ec2-ssh-key']) {
+                    sh """
+                      ssh -o StrictHostKeyChecking=no ubuntu@<EC2-PUBLIC-IP> '
+                        docker pull ${DOCKER_HUB_REPO}:${BUILD_NUMBER} &&
+                        docker stop myapp || true &&
+                        docker rm myapp || true &&
+                        docker run -d --name myapp -p 80:3000 ${DOCKER_HUB_REPO}:${BUILD_NUMBER}
+                      '
+                    """
+                }
+            }
+        }
+    }
+}

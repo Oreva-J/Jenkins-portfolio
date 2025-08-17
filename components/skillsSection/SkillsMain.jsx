@@ -6,24 +6,23 @@ import { fadeIn } from "../../framerMotion/variants";
 
 const SkillsMain = () => {
   return (
-    <div id="skills">
-      <div className="max-w-[1200px] px-4 mx-auto min-h-[600px] relative overflow-hidden">
-        <motion.div
-          variants={fadeIn("down", 0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.7 }}
-        >
-          <SkillsText />
-        </motion.div>
-        <div className="bottom-[50px] absolute left-[50%] -translate-x-[50%] sm:hidden lg:block">
-          <AllSkills />
-        </div>
-        <div className="sm:block lg:hidden">
-          <AllSkillsSM />
-        </div>
+    <section id="skills" className="relative py-24 px-4 max-w-6xl mx-auto min-h-[600px] z-10">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-dark via-primary/80 to-black/90 opacity-90 rounded-3xl shadow-2xl" />
+      <motion.div
+        variants={fadeIn("down", 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.7 }}
+      >
+        <SkillsText />
+      </motion.div>
+      <div className="mt-16 hidden lg:block">
+        <AllSkills />
       </div>
-    </div>
+      <div className="mt-10 block lg:hidden">
+        <AllSkillsSM />
+      </div>
+    </section>
   );
 };
 

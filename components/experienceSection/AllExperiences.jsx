@@ -39,7 +39,7 @@ const experiences = [
 
 const AllExperiences = () => {
   return (
-    <div className="flex md:flex-row sm:flex-col items-center justify-between">
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mt-12">
       {experiences.map((experience, index) => {
         return (
           <>
@@ -51,11 +51,9 @@ const AllExperiences = () => {
                 whileInView="show"
                 viewport={{ once: false, amount: 0.7 }}
               >
-                <FaArrowRightLong className="text-6xl text-orange lg:block sm:hidden" />
+                <FaArrowRightLong className="text-5xl text-accent/70 lg:block sm:hidden mx-4" />
               </motion.div>
-            ) : (
-              ""
-            )}
+            ) : null}
           </>
         );
       })}

@@ -6,7 +6,8 @@ import { fadeIn } from "../../framerMotion/variants";
 
 const ExperienceMain = () => {
   return (
-    <div id="experience" className="max-w-[1200px] mx-auto px-4">
+    <section id="experience" className="relative py-24 px-4 max-w-6xl mx-auto z-10">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-dark via-primary/80 to-black/90 opacity-90 rounded-3xl shadow-2xl" />
       <motion.div
         variants={fadeIn("down", 0)}
         initial="hidden"
@@ -23,9 +24,9 @@ const ExperienceMain = () => {
       >
         <ExperienceTop />
       </motion.div>
-      <div className="w-full h-1 mt-4 bg-lightBrown lg:block sm:hidden"></div>
+      <div className="w-full h-1 mt-4 bg-accent/40 rounded-full lg:block sm:hidden"></div>
       <AllExperiences />
-    </div>
+    </section>
   );
 };
 

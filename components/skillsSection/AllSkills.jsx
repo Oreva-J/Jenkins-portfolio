@@ -48,7 +48,7 @@ const skills = [
 const AllSkills = () => {
   return (
     <div>
-      <div className="flex items-center justify-center relative gap-2 max-w-[1200px] mx-auto">
+      <div className="flex items-center justify-center flex-wrap gap-8 max-w-4xl mx-auto">
         {skills.map((item, index) => {
           return (
             <motion.div

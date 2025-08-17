@@ -20,11 +20,11 @@ const FooterMain = () => {
     },
   ];
   return (
-    <div className="px-4">
-      <div className="w-full h-[1px] bg-lightGrey mt-24"></div>
-      <div className="md:flex justify-between mt-4 max-w-[1200px] mx-auto sm:hidden">
-        <p className="text-3xl text-lightGrey ">Abdelrahman Qassem</p>
-        <ul className="flex gap-4 text-lightGrey text-xl">
+    <footer className="px-4">
+      <div className="w-full h-[2px] bg-accent/30 mt-24 rounded-full"></div>
+      <div className="md:flex justify-between items-center mt-6 max-w-6xl mx-auto sm:hidden bg-white/5 backdrop-blur-lg rounded-2xl p-6 shadow border border-accent/10">
+        <p className="text-2xl font-special font-bold text-accent tracking-widest">Oreva Soboss</p>
+        <ul className="flex gap-6 text-secondary text-lg font-body">
           {footerLinks.map((item, index) => {
             return (
               <li key={index}>
@@ -34,7 +34,7 @@ const FooterMain = () => {
                   duration={500}
                   offset={-120}
                   to={item.section}
-                  className="hover:text-white transition-all duration-500 cursor-pointer"
+                  className="hover:text-accent transition-all duration-300 cursor-pointer px-2 py-1 rounded-md hover:bg-accent/10"
                 >
                   {item.name}
                 </Link>
@@ -43,10 +43,10 @@ const FooterMain = () => {
           })}
         </ul>
       </div>
-      <p className="max-w-[1200px] mx-auto text-right mt-2 mb-12 text-sm text-lightBrown">
-        © 2024 Abdelrahman | All Rights Reserved.
+      <p className="max-w-6xl mx-auto text-right mt-4 mb-10 text-xs text-accent/60 font-body">
+        © 2025 Oreva Soboss | All Rights Reserved.
       </p>
-    </div>
+    </footer>
   );
 };
 

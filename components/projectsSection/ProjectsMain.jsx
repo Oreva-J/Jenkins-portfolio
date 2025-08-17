@@ -36,7 +36,8 @@ const projects = [
 
 const ProjectsMain = () => {
   return (
-    <div id="projects" className="max-w-[1200px] mx-auto px-4">
+    <section id="projects" className="relative py-24 px-4 max-w-6xl mx-auto z-10">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-dark via-primary/80 to-black/90 opacity-90 rounded-3xl shadow-2xl" />
       <motion.div
         variants={fadeIn("top", 0)}
         initial="hidden"
@@ -45,7 +46,7 @@ const ProjectsMain = () => {
       >
         <ProjectsText />
       </motion.div>
-      <div className="flex flex-col gap-20 max-w-[900px] mx-auto mt-12">
+      <div className="flex flex-col gap-20 max-w-3xl mx-auto mt-12">
         {projects.map((project, index) => {
           return (
             <SingleProject
@@ -54,11 +55,12 @@ const ProjectsMain = () => {
               year={project.year}
               align={project.align}
               image={project.image}
+              link={project.link}
             />
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 
