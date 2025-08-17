@@ -4,11 +4,14 @@ pipeline {
     environment {
         DOCKER_HUB_REPO = 'nizzzy/docker-portfolio'
     }
+    parameters{
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build')
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Oreva-J/Jenkins-portfolio.git'
+                git branch: "${params.BRANCH_NAME}", url: 'https://github.com/Oreva-J/Jenkins-portfolio.git'
             }
         }
 
