@@ -37,7 +37,7 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu',
+                    withCredentials([sshUserPrivateKey(credentialsId: 'aws-ec2-ssh',
                         keyFileVariable: 'SSH_KEY')]) {
                         bat """
                         ssh -o StrictHostKeyChecking=no -i %SSH_KEY% ubuntu@34.240.15.233 "
