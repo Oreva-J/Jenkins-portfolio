@@ -40,7 +40,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-ec2-ssh',
                         keyFileVariable: 'SSH_KEY')]) {
                         bat """
-                        ssh -o StrictHostKeyChecking=no -i %SSH_KEY% ubuntu@34.240.15.233 "
+                        ssh -o StrictHostKeyChecking=no -o StrictModes=no -i %SSH_KEY% ubuntu@34.240.15.233 "
                             docker pull ${DOCKER_HUB_REPO}:${BUILD_NUMBER} &&
                             docker stop portfolio || true &&
                             docker rm portfolio || true &&
