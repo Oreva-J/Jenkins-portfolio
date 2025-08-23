@@ -38,7 +38,7 @@ pipeline {
             steps {
                 sshagent(['aws-ec2-ssh']) {
                     sh """
-                      ssh -o StrictHostKeyChecking=no ubuntu@54.246.6.141 '
+                      ssh -o StrictHostKeyChecking=no ubuntu@34.240.15.233 '
                         docker pull ${DOCKER_HUB_REPO}:${BUILD_NUMBER} &&
                         docker stop myapp || true &&
                         docker rm myapp || true &&
