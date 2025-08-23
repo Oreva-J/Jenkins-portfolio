@@ -36,17 +36,20 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['aws-ec2-ssh']) {
-                    sh """
-                      ssh -o StrictHostKeyChecking=no ubuntu@34.240.15.233 '
-                        docker pull ${DOCKER_HUB_REPO}:${BUILD_NUMBER} &&
-                        docker stop myapp || true &&
-                        docker rm myapp || true &&
-                        docker run -d --name myapp -p 80:3000 ${DOCKER_HUB_REPO}:${BUILD_NUMBER}
-                      '
-                    """
-                }
+                script {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu',
+                        keyFileVariable: 'SSH_KEY')]) {
+                        bat """
+                        ssh -o StrictHostKeyChecking=no -i %SSH_KEY% ubuntu@34.240.15.233 "
+                            docker pull ${DOCKER_HUB_REPO}:${BUILD_NUMBER} &&
+                            docker stop portfolio || true &&
+                            docker rm portfolio || true &&
+                            docker run -d --name portfolio -p 80:80 ${DOCKER_HUB_REPO}:${BUILD_NUMBER}
+                        "
+                        """
+                    }
             }
         }
+}
     }
 }
