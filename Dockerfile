@@ -1,18 +1,31 @@
-# Use official Node.js image
-FROM node:22
 
-# Create app directory
-WORKDIR /usr/src/app
+# Use Node.js base image
+FROM node:18-alpine AS builder
 
-# Copy package.json & install dependencies
+WORKDIR /app
+
+# Copy package.json and install dependencies
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install --production=false
 
-# Copy app source
+# Copy all source files
 COPY . .
 
-# Expose port
+# Build the Next.js app
+RUN npm run build
+
+# Production image
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/package*.json ./
+RUN npm install --production
+
+# Copy built files from builder
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
 EXPOSE 3000
 
-# Start the app
 CMD ["npm", "start"]
