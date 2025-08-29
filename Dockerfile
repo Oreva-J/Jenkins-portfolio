@@ -1,4 +1,4 @@
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -7,18 +7,18 @@ RUN npm install
 
 COPY . .
 
-# Build Next.js production files
-RUN npm run build
+# Build Next.js static export
+RUN npm run build && npm run export
 
 # Stage 2: Run with Nginx
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
-# Copy Next.js output
-COPY --from=builder /app/out . 
+# Copy Next.js static output
+COPY --from=builder /app/out .
 
-# Copy custom Nginx config
-COPY config/nginx.conf /etc/nginx/conf.d/default.conf
+# Copy custom Nginx config from root
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port
 EXPOSE 80
