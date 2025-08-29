@@ -10,6 +10,16 @@ COPY . .
 # Build Next.js production files
 RUN npm run build
 
-EXPOSE 3000
+# Stage 2: Run with Nginx
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html
 
-CMD ["npm", "start"]
+# Copy Next.js output
+COPY --from=builder /app/out . 
+
+# Copy custom Nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
