@@ -8,7 +8,7 @@ RUN npm install
 COPY . .
 
 # Build Next.js static export
-RUN npm run build && npm run export
+RUN npm run build 
 
 # Stage 2: Run with Nginx
 FROM nginx:alpine
