@@ -33,21 +33,20 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy to EC2') {
             steps {
                 script {
                     sshagent(['aws-ec2-ssh']) {
                         sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@18.203.237.67 "
-                        docker pull ${DOCKER_HUB_REPO}:${BUILD_NUMBER} &&
-                        docker stop portfolio || true &&
-                        docker rm portfolio || true &&
-                        docker run -d --name portfolio -p 80:80 ${DOCKER_HUB_REPO}:${BUILD_NUMBER}"
+                            ssh -o StrictHostKeyChecking=no ubuntu@34.243.146.121 "
+                            kubectl set image deployment/portfolio-deployment portfolio=${DOCKER_HUB_REPO}:${BUILD_NUMBER} -n dev --record &&
+                            kubectl rollout status deployment/portfolio-deployment -n dev &&
+                            kubectl apply -f /home/ubuntu/manifest/
+                            "
                         """
                     }
                 }
             }
-}
+        }
     }
 }
