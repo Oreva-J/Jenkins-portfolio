@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: portfolio
-          image: nizzzy/portfolio:latest
+          image: nizzzy/docker-portfolio:latest
           ports:
             - containerPort: 80
