@@ -38,7 +38,7 @@ pipeline {
                 script {
                     sshagent(['aws-ec2-ssh']) {
                         sh """
-                            ssh -o StrictHostKeyChecking=no ubuntu@34.243.146.121 "
+                            ssh -o StrictHostKeyChecking=no ubuntu@54.194.123.140 "
                             kubectl set image deployment/portfolio-deployment portfolio=${DOCKER_HUB_REPO}:${BUILD_NUMBER} -n dev --record &&
                             kubectl rollout status deployment/portfolio-deployment -n dev &&
                             kubectl apply -f /home/ubuntu/manifest/
