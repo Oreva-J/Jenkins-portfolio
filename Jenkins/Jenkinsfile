@@ -38,6 +38,7 @@ pipeline {
                 script {
                     sshagent(['aws-ec2-ssh']) {
                         sh """
+                            scp -o StrictHostKeyChecking=no -r manifest/ ubuntu@54.194.123.140:/home/ubuntu/manifest
                             ssh -o StrictHostKeyChecking=no ubuntu@54.194.123.140 "
                                 export KUBECONFIG=/home/ubuntu/.kube/config &&
                                 kubectl apply -f /home/ubuntu/manifest/namespace.yaml &&
