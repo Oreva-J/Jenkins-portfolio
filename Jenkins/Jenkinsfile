@@ -40,7 +40,6 @@ pipeline {
                         sh """
                             scp -o StrictHostKeyChecking=no -r manifest/ ubuntu@108.129.92.222:/home/ubuntu/manifest
                             ssh -o StrictHostKeyChecking=no ubuntu@108.129.92.222 "
-                                export KUBECONFIG=/home/ubuntu/.kube/config &&
                                 kubectl apply -f /home/ubuntu/manifest/namespace.yaml &&
                                 kubectl apply -f /home/ubuntu/manifest/ -n dev &&
                                 kubectl set image deployment/portfolio-deployment portfolio=${DOCKER_HUB_REPO}:${BUILD_NUMBER} -n dev &&
